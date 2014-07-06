@@ -4,7 +4,7 @@
 
     var Handlebars = require("injectify/runtime");
 
-    Handlebars.registerHelper("region", function (name, options) {
+    function regionHelper(name, options) {
         var id = _.uniqueId('region'),
             selector = '#' + id,
             view = this.view;
@@ -15,16 +15,19 @@
             view.regionManager.addRegion(name, {
                 selector: selector,
                 regionType: require("./replace-region"),
-                parentEl: function(){ return view.$el; }
+                parentEl: function () {
+                    return view.$el;
+                }
             });
         }
         else {
             console.warn("Cannot find 'view' for region '" + name + "'");
         }
-        console.log(options, name);
 
         return new Handlebars.SafeString('<div id="' + id + '"></div>');
-    });
+    }
+
+    Handlebars.registerHelper("region", regionHelper);
 
     var mixinTemplateHelpers = Marionette.View.prototype.mixinTemplateHelpers;
     Marionette.View.prototype.mixinTemplateHelpers = function (data) {
@@ -33,5 +36,7 @@
 
         return data;
     };
+
+    module.exports = regionHelper;
 
 })();
