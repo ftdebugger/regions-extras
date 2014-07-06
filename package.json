@@ -1,0 +1,19 @@
+{
+  "name": "regions-extra",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ftdebugger/regions-extra.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ftdebugger/regions-extra/issues"
+  },
+  "homepage": "https://github.com/ftdebugger/regions-extra"
+}
