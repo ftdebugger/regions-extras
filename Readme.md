@@ -1,5 +1,5 @@
-Regions extra
-=============
+Regions extras
+==============
 
 Extra regions for marionette.
 
@@ -21,7 +21,7 @@ and this script:
 
 ```js
 
-var ReplaceRegion = require("regions-extra/replace-region"),
+var ReplaceRegion = require("regions-extras/replace-region"),
     region = new ReplaceRegion({
         el: "#region"
     });
