@@ -2,7 +2,8 @@
     //noinspection BadExpressionStatementJS
     "use strict";
 
-    var Handlebars = require("injectify/runtime");
+    var Handlebars = require("./handlebars"),
+        Marionette = require("./marionette");
 
     function regionHelper(name, options) {
         var id = _.uniqueId('region'),

@@ -10,8 +10,8 @@
     "type": "git",
     "url": "git@github.com:ftdebugger/regions-extra.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Evgeny Shpilevsky",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ftdebugger/regions-extra/issues"
   },

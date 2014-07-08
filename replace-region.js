@@ -2,7 +2,8 @@
     //noinspection BadExpressionStatementJS
     "use strict";
 
-    var Region = Marionette.Region;
+    var Marionette = require("./marionette"),
+        Region = Marionette.Region;
 
     module.exports = Region.extend({
 
