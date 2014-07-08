@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:ftdebugger/regions-extra.git"
+    "url": "git@github.com:ftdebugger/regions-extras.git"
   },
   "author": "Evgeny Shpilevsky",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ftdebugger/regions-extra/issues"
+    "url": "https://github.com/ftdebugger/regions-extras/issues"
   },
-  "homepage": "https://github.com/ftdebugger/regions-extra"
+  "homepage": "https://github.com/ftdebugger/regions-extras"
 }
