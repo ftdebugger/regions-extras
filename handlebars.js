@@ -1,11 +1,28 @@
-try {
-    module.exports = require("injectify/runtime");
-}
-catch (e) {
-    try {
-        module.exports = require("hbsfy/runtime")
+module.exports = {
+    instance: null,
+
+    /**
+     * @returns {Handlebars}
+     */
+    getInstance: function () {
+        if (!this.instance) {
+            if (typeof Handlebars != "undefined") {
+                this.instance = Handlebars;
+            }
+        }
+
+        if (!this.instance) {
+            throw new Error("Cannot find handlebars");
+        }
+
+        return this.instance;
+    },
+
+    /**
+     * @param {Handlebars} instance
+     */
+    setInstance: function (instance) {
+        this.instance = instance;
     }
-    catch (e) {
-        module.exports = require('handlebars/runtime')['default'];
-    }
-}
+};
+
