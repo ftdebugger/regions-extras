@@ -1,6 +1,6 @@
 {
   "name": "regions-extras",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Extra regions for marionette",
   "main": "index.js",
   "scripts": {
