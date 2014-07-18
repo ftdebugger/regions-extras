@@ -9,9 +9,6 @@ module.exports = {
             if (typeof Marionette != "undefined") {
                 this.instance = Marionette;
             }
-            else {
-                this.instance = require("regions-extras/marionette");
-            }
         }
 
         if (!this.instance) {

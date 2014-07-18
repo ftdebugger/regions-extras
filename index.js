@@ -7,10 +7,17 @@
 
     function regionHelper(name, options) {
         var id = _.uniqueId('region'),
-            selector = '#' + id,
-            view = this.view;
+            selector = '#' + id;
 
         name = name || id;
+
+        var context = this;
+
+        while (context && !context.view && context.__parent__) {
+            context = context.__parent__;
+        }
+
+        var view = context ? context.view : null;
 
         if (view) {
             view.regionManager.addRegion(name, {
