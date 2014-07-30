@@ -42,6 +42,10 @@
         data = mixinTemplateHelpers.call(this, data);
         data.view = this;
 
+        if (_.isFunction(data.content)) {
+            data.content = data.content(data);
+        }
+
         return data;
     };
 
