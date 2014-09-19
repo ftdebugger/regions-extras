@@ -16,14 +16,20 @@
         },
 
         close: function () {
-            Region.prototype.close.call(this);
+            var view = this.currentView;
+            if (!view) {
+                return;
+            }
 
             if (this.$placeholder) {
-                this.$el.replaceWith(this.$placeholder);
+                view.$el.replaceWith(this.$placeholder);
                 delete this.$placeholder;
             }
+
+            Region.prototype.close.call(this);
         }
 
     })
 
 })();
+
