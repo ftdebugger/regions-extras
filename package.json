@@ -10,7 +10,10 @@
     "type": "git",
     "url": "git@github.com:ftdebugger/regions-extras.git"
   },
-  "author": "Evgeny Shpilevsky",
+  "author": "Evgeny Shpilevsky <evgeny@shpilevsky.com>",
+  "contributors": [
+    "Denis Khomich"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ftdebugger/regions-extras/issues"
