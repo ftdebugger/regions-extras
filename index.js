@@ -23,7 +23,7 @@
         if (view) {
             view.regionManager.addRegion(name, {
                 selector: selector,
-                regionType: require("./replace-region"),
+                regionClass: require("./replace-region"),
                 parentEl: function () {
                     return view.$el;
                 }

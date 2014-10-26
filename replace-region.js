@@ -7,7 +7,8 @@
 
     module.exports = Region.extend({
 
-        open: function (view) {
+        attachHtml: function (view) {
+
             if (!this.$placeholder) {
                 this.$placeholder = this.$el;
             }
@@ -15,8 +16,10 @@
             this.$el.replaceWith(view.el);
         },
 
-        close: function () {
+        empty: function () {
+
             var view = this.currentView;
+
             if (!view) {
                 return;
             }
@@ -26,7 +29,7 @@
                 delete this.$placeholder;
             }
 
-            Region.prototype.close.call(this);
+            Region.prototype.empty.call(this);
         }
 
     })
