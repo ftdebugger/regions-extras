@@ -73,9 +73,9 @@ var Layout = Marionette.Layout.extend({
 it is use `replace-region` by default for now
 
 Changelog
----------
+=========
 
 v1.0.0
-======
+------
 
  * Marionette 2.0
