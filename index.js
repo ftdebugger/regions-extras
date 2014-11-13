@@ -8,7 +8,7 @@
     function regionHelper(name, options) {
         var id = _.uniqueId('region'),
             selector = '#' + id,
-            tempCntTag = (typeof options.hash.tag === 'string' ? options.hash.tag : 'div');
+            tagName = options.hash.tagName || options.hash.tag || 'div';
 
         name = name || id;
 
@@ -33,7 +33,7 @@
             console.warn("Cannot find 'view' for region '" + name + "'");
         }
 
-        return new Handlebars.SafeString('<'+ tempCntTag +' id="' + id + '"></'+ tempCntTag +'>');
+        return new Handlebars.SafeString('<'+ tagName +' id="' + id + '"></'+ tagName +'>');
     }
 
     Handlebars.registerHelper("region", regionHelper);
