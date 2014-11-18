@@ -12,13 +12,17 @@
 
         name = name || id;
 
-        var context = this;
+        var view = options.hash.view;
 
-        while (context && !context.view && context.__parent__) {
-            context = context.__parent__;
+        if (!view) {
+            var context = this;
+
+            while (context && !context.view && context.__parent__) {
+                context = context.__parent__;
+            }
+
+            view = context ? context.view : null;
         }
-
-        var view = context ? context.view : null;
 
         if (view) {
             view.regionManager.addRegion(name, {
