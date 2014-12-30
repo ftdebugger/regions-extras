@@ -8,17 +8,21 @@
     function regionHelper(name, options) {
         var id = _.uniqueId('region'),
             selector = '#' + id,
-            tempCntTag = (typeof options.hash.tag === 'string' ? options.hash.tag : 'div');
+            tagName = options.hash.tagName || options.hash.tag || 'div';
 
         name = name || id;
 
-        var context = this;
+        var view = options.hash.view;
 
-        while (context && !context.view && context.__parent__) {
-            context = context.__parent__;
+        if (!view) {
+            var context = this;
+
+            while (context && !context.view && context.__parent__) {
+                context = context.__parent__;
+            }
+
+            view = context ? context.view : null;
         }
-
-        var view = context ? context.view : null;
 
         if (view) {
             view.regionManager.addRegion(name, {
@@ -33,7 +37,7 @@
             console.warn("Cannot find 'view' for region '" + name + "'");
         }
 
-        return new Handlebars.SafeString('<'+ tempCntTag +' id="' + id + '"></'+ tempCntTag +'>');
+        return new Handlebars.SafeString('<'+ tagName +' id="' + id + '"></'+ tagName +'>');
     }
 
     Handlebars.registerHelper("region", regionHelper);
