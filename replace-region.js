@@ -8,6 +8,7 @@
     module.exports = Region.extend({
 
         attachHtml: function (view) {
+            this.listenToOnce(view, 'before:destroy', this._viewDestroy);
 
             if (!this.$placeholder) {
                 this.$placeholder = this.$el;
@@ -16,8 +17,7 @@
             this.$el.replaceWith(view.el);
         },
 
-        empty: function () {
-
+        _viewDestroy: function () {
             var view = this.currentView;
 
             if (!view) {
@@ -28,8 +28,6 @@
                 view.$el.replaceWith(this.$placeholder);
                 delete this.$placeholder;
             }
-
-            Region.prototype.empty.call(this);
         }
 
     })
