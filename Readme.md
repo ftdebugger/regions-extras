@@ -1,4 +1,4 @@
-Regions extras
+Regions extras [![Build Status](https://travis-ci.org/ftdebugger/regions-extras.svg)](https://travis-ci.org/ftdebugger/regions-extras)
 ==============
 
 Extra regions for marionette.
@@ -20,13 +20,12 @@ For example we have this template:
 and this script:
 
 ```js
-
 var ReplaceRegion = require("regions-extras/replace-region"),
     region = new ReplaceRegion({
         el: "#region"
     });
     
-    region.show(new SomeList());
+region.show(new SomeList());
 ```
 
 the result wil be:
@@ -74,6 +73,22 @@ it is use `replace-region` by default for now
 
 Changelog
 =========
+
+v1.0.3
+------
+
+ * #4 Can't use region for second time
+ * Karma + jasmine specs
+ 
+v1.0.2
+------
+
+ * Pass `view` option through helper
+ 
+v1.0.1
+------
+
+ * `tag` and `tagName` option to setup tagName
 
 v1.0.0
 ------
