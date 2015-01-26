@@ -8,6 +8,8 @@
     module.exports = Region.extend({
 
         open: function (view) {
+            this.listenToOnce(view, 'before:close', this._viewClose);
+
             if (!this.$placeholder) {
                 this.$placeholder = this.$el;
             }
@@ -15,7 +17,7 @@
             this.$el.replaceWith(view.el);
         },
 
-        close: function () {
+        _viewClose: function () {
             var view = this.currentView;
             if (!view) {
                 return;
