@@ -3,12 +3,14 @@
     "use strict";
 
     var Handlebars = require("./handlebars").getInstance(),
-        Marionette = require("./marionette").getInstance();
+        Marionette = require("./marionette").getInstance(),
+        ReplaceRegion = require('./replace-region');
 
     function regionHelper(name, options) {
         var id = _.uniqueId('region'),
             selector = '#' + id,
-            tagName = options.hash.tagName || options.hash.tag || 'div';
+            tagName = options.hash.tagName || options.hash.tag || 'div',
+            regionClass = options.hash.regionClass || ReplaceRegion;
 
         name = name || id;
 
@@ -27,7 +29,7 @@
         if (view) {
             view.regionManager.addRegion(name, {
                 selector: selector,
-                regionClass: require("./replace-region"),
+                regionClass: regionClass,
                 parentEl: function () {
                     return view.$el;
                 }
