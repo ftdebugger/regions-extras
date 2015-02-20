@@ -4,13 +4,13 @@
 
     var Handlebars = require("./handlebars").getInstance(),
         Marionette = require("./marionette").getInstance(),
-        ReplaceRegion = require('./replace-region');
+        regionManager = require('./region/manager');
 
     function regionHelper(name, options) {
         var id = _.uniqueId('region'),
             selector = '#' + id,
             tagName = options.hash.tagName || options.hash.tag || 'div',
-            regionClass = options.hash.regionClass || ReplaceRegion;
+            regionClass = regionManager.getRegion(options.hash);
 
         name = name || id;
 
