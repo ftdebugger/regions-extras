@@ -6,6 +6,9 @@
         Marionette = require("./marionette").getInstance(),
         regionManager = require('./region/manager');
 
+    // Register default region
+    require('./region/ReplaceRegion');
+
     function regionHelper(name, options) {
         var id = _.uniqueId('region'),
             selector = '#' + id,

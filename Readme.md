@@ -161,6 +161,10 @@ is equal to
 Changelog
 =========
 
+v1.0.6
+ 
+ * Auto load replace region to avoid BC 
+ 
 v1.0.5
 ------
 
