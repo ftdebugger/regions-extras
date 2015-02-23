@@ -165,13 +165,13 @@ v1.0.5
 ------
 
  * Add region manager
- * Ass async, regionType options
+ * Add async, regionType options
  * Add AsyncReplaceRegion
  
 v1.0.4
 ------
 
- * Ass regionClass option
+ * Add regionClass option
 
 v1.0.3
 ------
