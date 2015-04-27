@@ -161,7 +161,13 @@ is equal to
 Changelog
 =========
 
+v1.1.0
+======
+
+ * BC: Async regions expect `View.promise` method. Early was `then` method.
+
 v1.0.6
+------
  
  * Auto load replace region to avoid BC 
  
@@ -194,6 +200,6 @@ v1.0.1
  * `tag` and `tagName` option to setup tagName
 
 v1.0.0
-------
+======
 
  * Marionette 2.0
