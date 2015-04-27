@@ -19,7 +19,7 @@
 
             var token = this._asyncRenderToken = uniqueToken++;
 
-            view.promise().then(function () {
+            $.when(view.promise()).then(function () {
                 if (token === _this._asyncRenderToken) {
                     baseShow.call(_this, view, options);
                 }
