@@ -1,5 +1,6 @@
 var AsyncReplaceRegion = require('../region/AsyncReplaceRegion'),
-    AsyncView = require('./fixture/AsyncView');
+    AsyncView = require('./fixture/AsyncView'),
+    AsyncViewNoneDeferred = require('./fixture/AsyncViewNoneDeferred');
 
 describe("replace region", function () {
 
@@ -22,6 +23,12 @@ describe("replace region", function () {
         expect(this.view.$el).not.toBeInDOM();
         this.view._promise.resolve();
         expect(this.view.$el).toBeInDOM();
+    });
+
+    it("can render immidiatly inside region", function () {
+        var view = new AsyncViewNoneDeferred();
+        this.region.show(view);
+        expect(view.$el).toBeInDOM();
     });
 
     it("if region destroy before resolve, render will not invoked", function () {

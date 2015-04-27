@@ -10,8 +10,7 @@
         className: 'test',
 
         promise: function () {
-            this._promise = $.Deferred();
-            return this._promise;
+            return {data: 123};
         }
     });
 
