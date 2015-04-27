@@ -45,13 +45,13 @@ It is register in region manager as `replace`.
 Async replace region
 --------------------
 
-This region work like replace region, but it delay view render. Region expect implemented `then` method in view, which 
+This region work like replace region, but it delay view render. Region expect implemented `promise` method in view, which
 return promise (`jQuery.Deferred` for example). View will be rendered when promise fulfilled.
 
 ```js
 var AsyncReplaceRegion = require("regions-extras/region/AsyncReplaceRegion");
 var AsyncView = Backbone.View.extend({
-    then: function() {
+    promise: function () {
         return this.model.fetch();
     }
 });

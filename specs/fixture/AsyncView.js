@@ -9,9 +9,9 @@
         template: require("./tpl/SimpleView.hbs"),
         className: 'test',
 
-        then: function (callback) {
+        promise: function () {
             this._promise = $.Deferred();
-            return this._promise.then(callback);
+            return this._promise;
         }
     });
 
