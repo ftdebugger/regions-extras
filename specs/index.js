@@ -3,7 +3,11 @@ var Backbone = require('backbone');
 window.$ = window.jQuery = Backbone.$ = require('jquery');
 
 window.Marionette = require('backbone.marionette');
-window.Handlebars = require('handlebars/runtime');
+
+require('../index').register({
+    Handlebars: require('injectify/runtime'),
+    Marionette: require('backbone.marionette')
+});
 
 // configure libs
 require('jasmine-jquery/lib/jasmine-jquery');

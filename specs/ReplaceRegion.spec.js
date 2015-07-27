@@ -1,4 +1,4 @@
-var ReplaceRegion = require('../replace-region'),
+var ReplaceRegion = require('../region/ReplaceRegion'),
     SimpleView = require('./fixture/SimpleView');
 
 describe('replace region', function () {

@@ -3,6 +3,21 @@ Regions extras [![Build Status](https://travis-ci.org/ftdebugger/regions-extras.
 
 Extra regions for marionette.
 
+Install helper to system
+------------------------
+
+    npm install --save regions-extras
+    
+and now register in Handlebars
+
+```js
+require('regions-extras').register({
+    Handlebars: require('injectify/runtime'), // By default it will get Handlebars from window object
+    Marionette: require('backbone.marionette'), // By default it will get Marionette from window object
+    registerHelper: true // by default
+});
+```
+
 Replace region
 --------------
 
@@ -107,13 +122,6 @@ Additionally, region helper allow you override some useful options:
 {{region tagName="ul"}} -> <ul id="region123"></ul>
 ```
 
-
-### tagName
-
-```handlebars
-{{region tagName="ul"}} -> <ul id="region123"></ul>
-```
-
 ### regionClass
 
 You can specify class of region to create
@@ -160,6 +168,21 @@ is equal to
 
 Changelog
 =========
+
+V2.0.0
+======
+
+ * BC: API change. Helper register now looks like:
+
+```js
+require('regions-extras').register({
+    Handlebars: require('injectify/runtime'),
+    Marionette: require('backbone.marionette')
+});
+```
+
+ * BC: remove handlebars and marionette registry. Pass instances to register function
+ * BC: remove replace-region file from root, use `require('regions-extras/region/ReplaceRegion')` instead
 
 v1.1.0
 ======

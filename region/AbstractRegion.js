@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-    var Marionette = require('../marionette').getInstance(),
-        Region = Marionette.Region,
+    var RegionsExtras = require('../index'),
+        Region = RegionsExtras.options.Marionette.Region,
         regionManager = require('./manager');
 
     /**
