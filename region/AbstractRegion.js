@@ -1,8 +1,7 @@
 (function () {
-    //noinspection BadExpressionStatementJS
     'use strict';
 
-    var Marionette = require("../marionette").getInstance(),
+    var Marionette = require('../marionette').getInstance(),
         Region = Marionette.Region,
         regionManager = require('./manager');
 

@@ -1,5 +1,4 @@
 (function () {
-    //noinspection BadExpressionStatementJS
     'use strict';
 
     var manager = {
@@ -59,7 +58,7 @@
             type = 'async_' + type;
         }
 
-        return this.regions[type]
+        return this.regions[type];
     });
 
     module.exports = manager;

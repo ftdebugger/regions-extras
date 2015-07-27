@@ -1,6 +1,5 @@
 (function () {
-    //noinspection BadExpressionStatementJS
-    "use strict";
+    'use strict';
 
     var ReplaceRegion = require('./ReplaceRegion'),
         baseShow = ReplaceRegion.prototype.show,
@@ -32,7 +31,6 @@
         }
 
     });
-
 
 })();
 

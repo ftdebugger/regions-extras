@@ -2,10 +2,10 @@ var AsyncReplaceRegion = require('../region/AsyncReplaceRegion'),
     AsyncView = require('./fixture/AsyncView'),
     AsyncViewNoneDeferred = require('./fixture/AsyncViewNoneDeferred');
 
-describe("replace region", function () {
+describe('replace region', function () {
 
     beforeEach(function () {
-        this.$el = $("<div></div>").appendTo('body');
+        this.$el = $('<div></div>').appendTo('body');
         this.region = new AsyncReplaceRegion({
             el: this.$el
         });
@@ -17,7 +17,7 @@ describe("replace region", function () {
         this.view.destroy();
     });
 
-    it("can render inside region", function () {
+    it('can render inside region', function () {
         this.region.show(this.view);
 
         expect(this.view.$el).not.toBeInDOM();
@@ -25,13 +25,13 @@ describe("replace region", function () {
         expect(this.view.$el).toBeInDOM();
     });
 
-    it("can render immidiatly inside region", function () {
+    it('can render immediately inside region', function () {
         var view = new AsyncViewNoneDeferred();
         this.region.show(view);
         expect(view.$el).toBeInDOM();
     });
 
-    it("if region destroy before resolve, render will not invoked", function () {
+    it('if region destroy before resolve, render will not invoked', function () {
         var spy = jasmine.createSpy();
         this.view.on('render', spy);
 

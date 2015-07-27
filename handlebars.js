@@ -6,13 +6,13 @@ module.exports = {
      */
     getInstance: function () {
         if (!this.instance) {
-            if (typeof Handlebars != "undefined") {
+            if (typeof Handlebars != 'undefined') {
                 this.instance = Handlebars;
             }
         }
 
         if (!this.instance) {
-            throw new Error("Cannot find handlebars");
+            throw new Error('Cannot find handlebars');
         }
 
         return this.instance;

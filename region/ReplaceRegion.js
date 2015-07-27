@@ -1,6 +1,5 @@
 (function () {
-    //noinspection BadExpressionStatementJS
-    "use strict";
+    'use strict';
 
     var AbstractRegion = require('./AbstractRegion');
 
@@ -34,7 +33,6 @@
         }
 
     });
-
 
 })();
 

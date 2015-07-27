@@ -1,9 +1,9 @@
+// jscs:disable safeContextKeyword
 (function () {
-    //noinspection BadExpressionStatementJS
-    "use strict";
+    'use strict';
 
-    var Handlebars = require("./handlebars").getInstance(),
-        Marionette = require("./marionette").getInstance(),
+    var Handlebars = require('./handlebars').getInstance(),
+        Marionette = require('./marionette').getInstance(),
         regionManager = require('./region/manager');
 
     // Register default region
@@ -37,15 +37,14 @@
                     return view.$el;
                 }
             });
-        }
-        else {
-            console.warn("Cannot find 'view' for region '" + name + "'");
+        } else {
+            console.warn('Cannot find "view" for region "' + name + '"');
         }
 
-        return new Handlebars.SafeString('<'+ tagName +' id="' + id + '"></'+ tagName +'>');
+        return new Handlebars.SafeString('<' + tagName + ' id=' + id + '></' + tagName + '>');
     }
 
-    Handlebars.registerHelper("region", regionHelper);
+    Handlebars.registerHelper('region', regionHelper);
 
     var mixinTemplateHelpers = Marionette.View.prototype.mixinTemplateHelpers;
     Marionette.View.prototype.mixinTemplateHelpers = function (data) {
