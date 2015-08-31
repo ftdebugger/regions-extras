@@ -162,6 +162,12 @@ Changelog
 =========
 
 v1.0.6
+------
+
+ * Fix memory leak, when change view in region
+
+v1.0.6
+------
  
  * Auto load replace region to avoid BC 
  
