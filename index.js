@@ -14,8 +14,8 @@
      */
     var _getView = function (context) {
         if (context) {
-            while (context && !context.view && context.__parent__) {
-                context = context.__parent__;
+            while (context && !context.view && context._parent) {
+                context = context._parent;
             }
 
             return context ? context.view : null;
@@ -42,11 +42,12 @@
         } else {
             view = _getView(context);
 
-            if (!view && options.data && options.data.root) {
-                view = _getView(options.data.root);
-            }
-            if (!view && options.data && options.data._parent) {
-                view = _getView(options.data._parent.root);
+            if (!view && options.data) {
+                view = _getView(options.data);
+
+                if (!view && options.data.root) {
+                    view = _getView(options.data.root);
+                }
             }
         }
 
@@ -109,10 +110,28 @@
         };
     };
 
+    var injectViewThroughRenderer = function (Marionette) {
+        return function (template, data, view) {
+            if (!template) {
+                throw new Marionette.Error({
+                    name: 'TemplateNotFoundError',
+                    message: 'Cannot render the template since its false, null or undefined.'
+                });
+            }
+
+            return template(data, {data: {view: view}});
+        };
+    };
+
     /**
      * Register helper system wide
      *
-     * @param {{Handlebars: Handlebars, Marionette: Marionette, registerHelper: boolean}} [options]
+     * @param {{
+     *  Handlebars: Handlebars,
+     *  Marionette: Marionette,
+     *  registerHelper: boolean,
+     *  registerRenderer: boolean
+     * }} [options]
      */
     regionHelper.register = function (options) {
         options = options || {};
@@ -126,6 +145,10 @@
         if (options.registerHelper || typeof options.registerHelper === 'undefined') {
             Handlebars.registerHelper('region', regionHelper);
             ViewProto.mixinTemplateHelpers = injectView(ViewProto.mixinTemplateHelpers);
+        }
+
+        if (options.registerRenderer || options.registerRenderer === undefined) {
+            Marionette.Renderer.render = injectViewThroughRenderer(Marionette);
         }
 
         // Register default region
