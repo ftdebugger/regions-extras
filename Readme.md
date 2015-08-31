@@ -161,6 +161,11 @@ is equal to
 Changelog
 =========
 
+v1.1.1
+------
+
+ * Fix memory leak, when change view in region
+
 v1.1.0
 ======
 
