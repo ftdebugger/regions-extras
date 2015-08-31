@@ -23,6 +23,8 @@
                 return;
             }
 
+            this.stopListening(view);
+
             if (this.$placeholder) {
                 view.$el.replaceWith(this.$placeholder);
                 delete this.$placeholder;
