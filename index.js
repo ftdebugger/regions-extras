@@ -119,7 +119,7 @@
                 });
             }
 
-            return template(data, {data: {view: view}});
+            return String(template(data, {data: {view: view}}));
         };
     };
 
