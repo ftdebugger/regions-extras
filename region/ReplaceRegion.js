@@ -16,7 +16,7 @@
                 this.$placeholder = this.$el;
             }
 
-            this.$el.replaceWith(view.el);
+            this.$el.replaceWith(view.$el);
         },
 
         _viewDestroy: function () {
