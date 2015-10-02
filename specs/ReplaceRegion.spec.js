@@ -1,5 +1,6 @@
 var ReplaceRegion = require('../region/ReplaceRegion'),
-    SimpleView = require('./fixture/SimpleView');
+    SimpleView = require('./fixture/SimpleView'),
+    SimpleLayout = require('./fixture/SimpleLayout');
 
 describe('replace region', function () {
 
@@ -61,6 +62,12 @@ describe('replace region', function () {
             expect(this.view2.$el).toBeInDOM();
         });
 
+    });
+
+    it('create link in region view to parent view', function () {
+        var layout = new SimpleLayout().render();
+        layout.regionA.show(this.view);
+        expect(this.view._parentView).toBe(layout);
     });
 
 });

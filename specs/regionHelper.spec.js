@@ -35,4 +35,9 @@ describe('region helper', function () {
         expect(this.layout.$el.html()).toContain('simple view');
     });
 
+    it('create link in region to parent', function () {
+        expect(this.layout.regionA._parentView).toBe(this.layout);
+        expect(this.layout.regionB._parentView).toBe(this.layout);
+    });
+
 });

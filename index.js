@@ -81,13 +81,15 @@
         var view = getView(this, options);
 
         if (view) {
-            view.regionManager.addRegion(name, {
+            var region = view.regionManager.addRegion(name, {
                 selector: selector,
                 regionClass: regionClass,
                 parentEl: function () {
                     return view.$el;
                 }
             });
+
+            region._parentView = view;
         } else {
             console.warn('Cannot find "view" for region "' + name + '"');
         }

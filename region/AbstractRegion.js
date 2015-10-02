@@ -8,7 +8,19 @@
     /**
      * @class AbstractRegion
      */
-    module.exports = Region.extend({}, {
+    module.exports = Region.extend({
+
+        /**
+         * @param {Marionette.View} view
+         * @param {{}} options
+         * @returns {*}
+         */
+        show: function (view, options) {
+            view._parentView = this._parentView;
+            return Region.prototype.show.call(this, view, options);
+        }
+
+    }, {
 
         /**
          * @param {object|{name: string}} instanceOptions

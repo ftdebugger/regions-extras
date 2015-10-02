@@ -1,6 +1,7 @@
 var AsyncReplaceRegion = require('../region/AsyncReplaceRegion'),
     AsyncView = require('./fixture/AsyncView'),
-    AsyncViewNoneDeferred = require('./fixture/AsyncViewNoneDeferred');
+    AsyncViewNoneDeferred = require('./fixture/AsyncViewNoneDeferred'),
+    SimpleLayout = require('./fixture/SimpleLayout');
 
 describe('replace region', function () {
 
@@ -39,6 +40,14 @@ describe('replace region', function () {
         this.region.empty();
 
         expect(spy.calls.count()).toBe(0);
+    });
+
+    it('create link in region view to parent view', function () {
+        var layout = new SimpleLayout().render();
+        layout.regionB.show(this.view);
+        this.view._promise.resolve();
+
+        expect(this.view._parentView).toBe(layout);
     });
 
 });
