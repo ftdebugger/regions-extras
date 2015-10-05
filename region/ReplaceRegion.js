@@ -10,13 +10,18 @@
         name: 'replace',
 
         attachHtml: function (view) {
-            this.listenToOnce(view, 'before:destroy', this._viewDestroy);
+            this.listenView(view);
 
             if (!this.$placeholder) {
                 this.$placeholder = this.$el;
             }
 
             this.$el.replaceWith(view.$el);
+            this.$el = view.$el;
+        },
+
+        listenView: function (view) {
+            this.listenToOnce(view, 'before:destroy', this._viewDestroy);
         },
 
         _viewDestroy: function () {
@@ -29,8 +34,10 @@
             this.stopListening(view);
 
             if (this.$placeholder) {
-                view.$el.replaceWith(this.$placeholder);
-                delete this.$placeholder;
+                this.$el.replaceWith(this.$placeholder);
+                this.$el = this.$placeholder;
+
+                this.$placeholder = null;
             }
         }
 
