@@ -169,6 +169,13 @@ is equal to
 Changelog
 =========
 
+v2.1.0
+======
+
+ * All regions now have link to parent in _parentView
+ * Use $el instead of el when possible
+ * More strong replacement in replace region
+
 V2.0.0
 ======
 
