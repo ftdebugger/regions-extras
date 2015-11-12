@@ -48,6 +48,9 @@ describe('replace region', function () {
         this.view._promise.resolve();
 
         expect(this.view._parentView).toBe(layout);
+        expect(this.view._parent).toBe(layout.regionB);
+        expect(this.view._parent._parent).toBe(layout.regionManager);
+        expect(this.view._parent._parent._parent).toBe(layout);
     });
 
 });

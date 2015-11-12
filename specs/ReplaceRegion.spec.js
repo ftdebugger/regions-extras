@@ -68,6 +68,9 @@ describe('replace region', function () {
         var layout = new SimpleLayout().render();
         layout.regionA.show(this.view);
         expect(this.view._parentView).toBe(layout);
+        expect(this.view._parent).toBe(layout.regionA);
+        expect(this.view._parent._parent).toBe(layout.regionManager);
+        expect(this.view._parent._parent._parent).toBe(layout);
     });
 
 });

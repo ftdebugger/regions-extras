@@ -17,6 +17,8 @@
          */
         show: function (view, options) {
             view._parentView = this._parentView;
+            view._parent = this;
+
             return Region.prototype.show.call(this, view, options);
         }
 

@@ -169,6 +169,11 @@ is equal to
 Changelog
 =========
 
+v2.1.1
+------
+
+ * Add _parent link to every view which attach to region, to unify method of parent search
+
 v2.1.0
 ======
 
