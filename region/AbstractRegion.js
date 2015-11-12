@@ -19,6 +19,10 @@
             view._parentView = this._parentView;
             view._parent = this;
 
+            if (!this._parentView && this._parent) {
+                view._parentView = this._parent._parent || this._parent;
+            }
+
             return Region.prototype.show.call(this, view, options);
         }
 
