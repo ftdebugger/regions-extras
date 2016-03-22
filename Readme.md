@@ -35,14 +35,14 @@ For example we have this template:
 and this script:
 
 ```js
-var ReplaceRegion = require('regions-extras/region/ReplaceRegion'),
-    region = new ReplaceRegion({
-        el: '#region'
-    });
-    
+var ReplaceRegion = require('regions-extras/region/ReplaceRegion');
+var region = new ReplaceRegion({
+    el: '#region'
+});
+
 region.show(new SomeList({
     tagName: 'ul'
-));
+});
 ```
 
 the result wil be:
@@ -61,7 +61,7 @@ Async replace region
 --------------------
 
 This region work like replace region, but it delay view render. Region expect implemented `promise` method in view, which
-return promise (`jQuery.Deferred` for example). View will be rendered when promise fulfilled.
+return promise (`jQuery.Deferred` or `Promise` for example). View will be rendered when promise fulfilled.
 
 ```js
 var AsyncReplaceRegion = require('regions-extras/region/AsyncReplaceRegion');
@@ -77,7 +77,7 @@ var region = new AsyncReplaceRegion({
     
 region.show(new SomeList({
     model: new User({id: 12})
-));
+});
 ```
 
 It is register in region manager as `async_replace`.
@@ -169,16 +169,21 @@ is equal to
 Changelog
 =========
 
+v3.0.0
+======
+
+ * Async regions use native `Promise` internally instead of `jQuery.Deferred`
+
 v2.1.1
 ------
 
- * Add _parent link to every view which attach to region, to unify method of parent search
+ * Add `_parent` link to every view which attach to region, to unify method of parent search
 
 v2.1.0
 ======
 
- * All regions now have link to parent in _parentView
- * Use $el instead of el when possible
+ * All regions now have link to parent in `_parentView`
+ * Use `$el` instead of `el` when possible
  * More strong replacement in replace region
 
 V2.0.0
@@ -210,8 +215,8 @@ v1.0.5
 ------
 
  * Add region manager
- * Add async, regionType options
- * Add AsyncReplaceRegion
+ * Add `async`, `regionType` options
+ * Add `AsyncReplaceRegion`
  
 v1.0.4
 ------

@@ -1,4 +1,5 @@
 var AsyncReplaceRegion = require('../region/AsyncReplaceRegion'),
+    AsyncViewDeferred = require('./fixture/AsyncViewDeferred'),
     AsyncView = require('./fixture/AsyncView'),
     AsyncViewNoneDeferred = require('./fixture/AsyncViewNoneDeferred'),
     SimpleLayout = require('./fixture/SimpleLayout');
@@ -27,6 +28,20 @@ describe('replace region', function () {
 
         return promise.then(function () {
             expect(_this.view.$el).toBeInDOM();
+            done();
+        });
+    });
+
+    it('can render jquery deferred view inside region', function (done) {
+        var _this = this,
+            view = new AsyncViewDeferred(),
+            promise = _this.region.show(view);
+
+        expect(view.$el).not.toBeInDOM();
+        view.resolve();
+
+        return promise.then(function () {
+            expect(view.$el).toBeInDOM();
             done();
         });
     });
@@ -66,5 +81,4 @@ describe('replace region', function () {
             done();
         });
     });
-
 });
