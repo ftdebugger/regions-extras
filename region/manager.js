@@ -1,66 +1,63 @@
-(function () {
-    'use strict';
+'use strict';
 
-    var manager = {
-        regions: {},
-        factories: [],
+var manager = {
+    regions: {},
+    factories: [],
 
-        /**
-         * @param factory
-         */
-        registerAbstractFactory: function (factory) {
-            this.factories.push(factory);
-        },
+    /**
+     * @param factory
+     */
+    registerAbstractFactory: function (factory) {
+        this.factories.push(factory);
+    },
 
-        /**
-         * @param {string} name
-         * @param {AbstractRegion} Region
-         */
-        registerRegion: function (name, Region) {
-            this.regions[name] = Region;
-        },
+    /**
+     * @param {string} name
+     * @param {AbstractRegion} Region
+     */
+    registerRegion: function (name, Region) {
+        this.regions[name] = Region;
+    },
 
-        /**
-         * @param {{regionClass: Function, regionType: string}} options
-         * @returns {AbstractRegion}
-         */
-        getRegion: function (options) {
-            var factories = this.factories;
+    /**
+     * @param {{regionClass: Function, regionType: string}} options
+     * @returns {AbstractRegion}
+     */
+    getRegion: function (options) {
+        var factories = this.factories;
 
-            for (var index = 0; index < factories.length; index++) {
-                var Region = factories[index].call(this, options);
-                if (Region) {
-                    return Region;
-                }
+        for (var index = 0; index < factories.length; index++) {
+            var Region = factories[index].call(this, options);
+            if (Region) {
+                return Region;
             }
-
-            throw new Error('Unknown region type');
         }
 
-    };
+        throw new Error('Unknown region type');
+    }
 
-    /**
-     * Allow pass regionClass to region
-     */
-    manager.registerAbstractFactory(function (options) {
-        if (options.regionClass && typeof options.regionClass === 'function') {
-            return options.regionClass;
-        }
-    });
+};
 
-    /**
-     * Allow pass regionType
-     */
-    manager.registerAbstractFactory(function (options) {
-        var type = (options.regionType || 'replace');
+/**
+ * Allow pass regionClass to region
+ */
+manager.registerAbstractFactory(function (options) {
+    if (options.regionClass && typeof options.regionClass === 'function') {
+        return options.regionClass;
+    }
+});
 
-        if (options.async) {
-            type = 'async_' + type;
-        }
+/**
+ * Allow pass regionType
+ */
+manager.registerAbstractFactory(function (options) {
+    var type = (options.regionType || 'replace');
 
-        return this.regions[type];
-    });
+    if (options.async) {
+        type = 'async_' + type;
+    }
 
-    module.exports = manager;
+    return this.regions[type];
+});
 
-})();
+module.exports = manager;

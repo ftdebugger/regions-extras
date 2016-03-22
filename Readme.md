@@ -35,9 +35,9 @@ For example we have this template:
 and this script:
 
 ```js
-var ReplaceRegion = require("regions-extras/region/ReplaceRegion"),
+var ReplaceRegion = require('regions-extras/region/ReplaceRegion'),
     region = new ReplaceRegion({
-        el: "#region"
+        el: '#region'
     });
     
 region.show(new SomeList({
@@ -64,7 +64,7 @@ This region work like replace region, but it delay view render. Region expect im
 return promise (`jQuery.Deferred` for example). View will be rendered when promise fulfilled.
 
 ```js
-var AsyncReplaceRegion = require("regions-extras/region/AsyncReplaceRegion");
+var AsyncReplaceRegion = require('regions-extras/region/AsyncReplaceRegion');
 var AsyncView = Backbone.View.extend({
     promise: function () {
         return this.model.fetch();
@@ -72,7 +72,7 @@ var AsyncView = Backbone.View.extend({
 });
 
 var region = new AsyncReplaceRegion({
-    el: "#region"
+    el: '#region'
 });
     
 region.show(new SomeList({
@@ -101,10 +101,10 @@ For example:
 and `Layout`:
 
 ```js
-require("region-extras");
+require('region-extras');
 
 var Layout = Marionette.Layout.extend({
-     template: require("./tpl/template.hbs"),
+     template: require('./tpl/template.hbs'),
 
      onRender: function () {
          this.test.show(new SomeView()); // region 'test' will be appeared here automatic

@@ -1,36 +1,32 @@
-(function () {
-    'use strict';
+'use strict';
 
-    var ReplaceRegion = require('./ReplaceRegion'),
-        baseShow = ReplaceRegion.prototype.show,
-        baseEmpty = ReplaceRegion.prototype.empty;
+var ReplaceRegion = require('./ReplaceRegion'),
+    baseShow = ReplaceRegion.prototype.show,
+    baseEmpty = ReplaceRegion.prototype.empty;
 
-    var uniqueToken = 1;
+var uniqueToken = 1;
 
-    /**
-     * @class ReplaceRegion
-     */
-    module.exports = ReplaceRegion.createRegion({
-        name: 'async_replace',
+/**
+ * @class ReplaceRegion
+ */
+module.exports = ReplaceRegion.createRegion({
+    name: 'async_replace',
 
-        show: function (view, options) {
-            var _this = this;
+    show: function (view, options) {
+        var _this = this;
 
-            var token = this._asyncRenderToken = uniqueToken++;
+        var token = this._asyncRenderToken = uniqueToken++;
 
-            $.when(view.promise()).then(function () {
-                if (token === _this._asyncRenderToken) {
-                    baseShow.call(_this, view, options);
-                }
-            });
-        },
+        return Promise.resolve(view.promise()).then(function () {
+            if (token === _this._asyncRenderToken) {
+                baseShow.call(_this, view, options);
+            }
+        });
+    },
 
-        empty: function () {
-            this._asyncRenderToken = null;
-            baseEmpty.call(this);
-        }
+    empty: function () {
+        this._asyncRenderToken = null;
+        baseEmpty.call(this);
+    }
 
-    });
-
-})();
-
+});
