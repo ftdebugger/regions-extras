@@ -18,18 +18,27 @@ describe('replace region', function () {
         this.view.destroy();
     });
 
-    it('can render inside region', function () {
-        this.region.show(this.view);
+    it('can render inside region', function (done) {
+        var _this = this,
+            promise = _this.region.show(_this.view);
 
-        expect(this.view.$el).not.toBeInDOM();
-        this.view._promise.resolve();
-        expect(this.view.$el).toBeInDOM();
+        expect(_this.view.$el).not.toBeInDOM();
+        _this.view.resolve();
+
+        return promise.then(function () {
+            expect(_this.view.$el).toBeInDOM();
+            done();
+        });
     });
 
-    it('can render immediately inside region', function () {
-        var view = new AsyncViewNoneDeferred();
-        this.region.show(view);
-        expect(view.$el).toBeInDOM();
+    it('can render immediately inside region', function (done) {
+        var view = new AsyncViewNoneDeferred(),
+            promise = this.region.show(view);
+
+        return promise.then(function () {
+            expect(view.$el).toBeInDOM();
+            done();
+        });
     });
 
     it('if region destroy before resolve, render will not invoked', function () {
@@ -42,15 +51,20 @@ describe('replace region', function () {
         expect(spy.calls.count()).toBe(0);
     });
 
-    it('create link in region view to parent view', function () {
-        var layout = new SimpleLayout().render();
-        layout.regionB.show(this.view);
-        this.view._promise.resolve();
+    it('create link in region view to parent view', function (done) {
+        var _this = this,
+            layout = new SimpleLayout().render(),
+            promise = layout.regionB.show(_this.view);
 
-        expect(this.view._parentView).toBe(layout);
-        expect(this.view._parent).toBe(layout.regionB);
-        expect(this.view._parent._parent).toBe(layout.regionManager);
-        expect(this.view._parent._parent._parent).toBe(layout);
+        _this.view.resolve();
+
+        return promise.then(function () {
+            expect(_this.view._parentView).toBe(layout);
+            expect(_this.view._parent).toBe(layout.regionB);
+            expect(_this.view._parent._parent).toBe(layout.regionManager);
+            expect(_this.view._parent._parent._parent).toBe(layout);
+            done();
+        });
     });
 
 });

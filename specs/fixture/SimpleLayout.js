@@ -1,8 +1,5 @@
-(function () {
-    'use strict';
+'use strict';
 
-    module.exports = Marionette.LayoutView.extend({
-        template: require('./tpl/SimpleLayout.hbs')
-    });
-
-})();
+module.exports = Marionette.LayoutView.extend({
+    template: require('./tpl/SimpleLayout.hbs')
+});

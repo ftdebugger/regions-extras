@@ -1,4 +1,6 @@
 // configure environment
+require('es6-shim');
+
 var Backbone = require('backbone');
 window.$ = window.jQuery = Backbone.$ = require('jquery');
 

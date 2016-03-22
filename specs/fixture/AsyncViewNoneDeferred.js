@@ -1,15 +1,10 @@
-(function () {
-    'use strict';
+'use strict';
 
-    /**
-     */
-    module.exports = Marionette.ItemView.extend({
-        template: require('./tpl/SimpleView.hbs'),
-        className: 'test',
+module.exports = Marionette.ItemView.extend({
+    template: require('./tpl/SimpleView.hbs'),
+    className: 'test',
 
-        promise: function () {
-            return {data: 123};
-        }
-    });
-
-})();
+    promise: function () {
+        return {data: 123};
+    }
+});

@@ -2,6 +2,8 @@ var SimpleLayout = require('./fixture/SimpleLayout');
 var SimpleView = require('./fixture/SimpleView');
 var AsyncView = require('./fixture/AsyncView');
 
+var SIMPLE_VIEW = 'simple view';
+
 describe('region helper', function () {
 
     beforeEach(function () {
@@ -21,18 +23,21 @@ describe('region helper', function () {
     it('first region will be synced', function () {
         this.layout.regionA.show(new SimpleView());
 
-        expect(this.layout.$el.html()).toContain('simple view');
+        expect(this.layout.$el.html()).toContain(SIMPLE_VIEW);
     });
 
-    it('second region will be async', function () {
-        var asyncView = new AsyncView();
-        this.layout.regionB.show(asyncView);
+    it('second region will be async', function (done) {
+        var _this = this,
+            asyncView = new AsyncView(),
+            promise = _this.layout.regionB.show(asyncView);
 
-        expect(this.layout.$el.html()).not.toContain('simple view');
+        expect(this.layout.$el.html()).not.toContain(SIMPLE_VIEW);
+        asyncView.resolve();
 
-        asyncView._promise.resolve();
-
-        expect(this.layout.$el.html()).toContain('simple view');
+        return promise.then(function () {
+            expect(_this.layout.$el.html()).toContain(SIMPLE_VIEW);
+            done();
+        });
     });
 
     it('create link in region to parent', function () {
