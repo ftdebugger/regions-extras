@@ -17,6 +17,7 @@ module.exports = AbstractRegion.createRegion({
 
         this.$el.replaceWith(view.$el);
         this.$el = view.$el;
+        this.el = view.$el.get(0);
     },
 
     listenView: function (view) {
@@ -35,6 +36,7 @@ module.exports = AbstractRegion.createRegion({
         if (this.$placeholder) {
             this.$el.replaceWith(this.$placeholder);
             this.$el = this.$placeholder;
+            this.el = this.$placeholder.get(0);
 
             this.$placeholder = null;
         }

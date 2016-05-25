@@ -24,7 +24,9 @@ describe('replace region', function () {
 
     it('replace region element and render own', function () {
         this.region.show(this.view);
-        expect(this.region.el).not.toBeInDOM();
+        expect(this.region.$placeholder).not.toBeInDOM();
+        expect(this.region.el).toBeInDOM();
+        expect(this.region.$el).toBeInDOM();
         expect(this.view.$el.parent()).toBeMatchedBy('body');
     });
 
