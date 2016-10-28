@@ -80,7 +80,23 @@ region.show(new SomeList({
 });
 ```
 
-It is register in region manager as `async_replace`.
+It is registered in region manager as `async_replace`.
+
+Another way of working with the `AsyncReplaceRegion` is providing a custom promise to it.
+After resolving a promise the `AsyncReplaceRegion` starts working the same as the `ReplaceRegion`.
+
+```js
+var AsyncReplaceRegion = require('regions-extras/region/AsyncReplaceRegion');
+
+var region = new AsyncReplaceRegion({
+    el: '#region',
+    promise: function() {
+        return this.model.fetch(); 
+    }
+});
+    
+region.show(MyCustomView);
+```
 
 Region helper
 -------------
@@ -164,6 +180,16 @@ This option is sugar for `regionType` option. It is append `async_` prefix to `r
 is equal to
 
 {{region "test" regionType="async_replace"}}
+```
+
+### promise
+
+This option is optional and is used for resolving async region to start showing views in it.
+If not provided, the `view.promise()` method will be invoked instead every time you call the
+`region.show()` method.
+
+```handlebars
+{{region "test" async=true promise=myCustomPromise}}
 ```
 
 Changelog
