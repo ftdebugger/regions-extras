@@ -70,8 +70,14 @@
      * @returns {Handlebars.SafeString}
      */
     var regionHelper = function (name, options) {
-        var id = 'region' + (++uniqueId),
-            selector = '#' + id,
+        var id = 'region' + (++uniqueId);
+
+        if (typeof options == "undefined") {
+            options = name;
+            name = id;
+        }
+
+        var selector = '#' + id,
             hash = options.hash,
             tagName = hash.tagName || hash.tag || 'div',
             regionClass = regionManager.getRegion(hash),
