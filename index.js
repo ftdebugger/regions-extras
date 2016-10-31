@@ -155,6 +155,7 @@
 
         // Register default region
         require('./region/ReplaceRegion');
+        require('./region/AsyncReplaceRegion');
     };
 
     regionHelper.getView = getView;
