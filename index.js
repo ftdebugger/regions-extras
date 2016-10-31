@@ -70,7 +70,7 @@
      * @returns {Handlebars.SafeString}
      */
     var regionHelper = function (name, options) {
-        var id = 'region' + (++uniqueId);
+        var id = 'r' + (++uniqueId).toString(36);
 
         if (typeof options == "undefined") {
             options = name;
