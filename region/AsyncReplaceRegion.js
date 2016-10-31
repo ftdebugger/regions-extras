@@ -17,7 +17,17 @@ module.exports = ReplaceRegion.createRegion({
 
         var token = this._asyncRenderToken = uniqueToken++;
 
-        return Promise.resolve(view.promise()).then(function () {
+        var promise;
+        if ('promise' in this.options) {
+            promise = this.options.promise;
+            if (typeof promise === 'function') {
+                promise = promise.call(this);
+            }
+        } else {
+            promise = view.promise();
+        }
+
+        return Promise.resolve(promise).then(function () {
             if (token === _this._asyncRenderToken) {
                 baseShow.call(_this, view, options);
             }

@@ -56,6 +56,27 @@ describe('replace region', function () {
         });
     });
 
+    it('can consume custom promise', function(done) {
+        var _this = this, resolve;
+
+        var region = new AsyncReplaceRegion({
+            el: _this.$el,
+            promise: new Promise(function(res) {
+                resolve = res;
+            })
+        });
+
+        var promise = region.show(_this.view);
+
+        expect(_this.view.$el).not.toBeInDOM();
+        resolve();
+
+        return promise.then(function () {
+            expect(_this.view.$el).toBeInDOM();
+            done();
+        });
+    });
+
     it('if region destroy before resolve, render will not invoked', function () {
         var spy = jasmine.createSpy();
         this.view.on('render', spy);

@@ -61,6 +61,7 @@
      *
      *   {{region "myRegion"}}
      *   {{region "myAsyncRegion" async=true}}
+     *   {{region "myAsyncRegion" async=true promise=customPromise}}
      *   {{region "myAsyncRegion" regionClass=(require "./SomeRegionClass")}}
      *   {{region "myAsyncRegion" regionType="replace_region"}}
      *
@@ -81,13 +82,19 @@
         var view = getView(this, options);
 
         if (view) {
-            var region = view.regionManager.addRegion(name, {
+            var params = {
                 selector: selector,
                 regionClass: regionClass,
                 parentEl: function () {
                     return view.$el;
                 }
-            });
+            };
+
+            if (hash.promise) {
+                params.promise = hash.promise;
+            }
+
+            var region = view.regionManager.addRegion(name, params);
 
             region._parentView = view;
         } else {

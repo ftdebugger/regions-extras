@@ -40,6 +40,25 @@ describe('region helper', function () {
         });
     });
 
+    it('third region will be async with custom promise', function (done) {
+        var _this = this,
+            asyncView = new AsyncView();
+
+        var haveBeenCalled = false;
+        asyncView.promise = function() {
+            haveBeenCalled = true;
+        };
+
+        var promise = _this.layout.regionC.show(asyncView);
+        _this.layout.resolve();
+
+        return promise.then(function () {
+            expect(_this.layout.$el.html()).toContain(SIMPLE_VIEW);
+            expect(haveBeenCalled).toBe(false);
+            done();
+        });
+    });
+
     it('create link in region to parent', function () {
         expect(this.layout.regionA._parentView).toBe(this.layout);
         expect(this.layout.regionB._parentView).toBe(this.layout);
