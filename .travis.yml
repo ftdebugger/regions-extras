@@ -1,8 +1,7 @@
 language: node_js
-before_script:
-  - sudo $(which npm) link
 node_js:
   - "0.10"
   - "0.12"
   - "4"
   - "5"
+  - "6"
