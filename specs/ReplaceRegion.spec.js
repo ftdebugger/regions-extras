@@ -30,15 +30,14 @@ describe('replace region', function () {
 
     it('replace region element and render own', function () {
         this.region.show(this.view);
-        expect(this.region.$placeholder).not.toBeInDOM();
-        expect(this.region.$el).toBeInDOM();
+        expect(this.view.$el).toBeInDOM();
     });
 
     it('correct replace region during view destroy', function () {
         this.region.show(this.view);
         this.view.destroy();
 
-        expect(this.region.$el).toBeInDOM();
+        expect($(this.region.el)).toBeInDOM();
     });
 
     it('empty region', function () {
@@ -46,7 +45,7 @@ describe('replace region', function () {
         this.region.empty();
 
         expect(this.view.$el).not.toBeInDOM();
-        expect(this.region.$el).toBeInDOM();
+        expect($(this.region.el)).toBeInDOM();
     });
 
     describe('double render', function () {
