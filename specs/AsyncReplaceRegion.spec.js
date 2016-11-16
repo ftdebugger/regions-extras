@@ -1,8 +1,13 @@
-var AsyncReplaceRegion = require('../region/AsyncReplaceRegion'),
-    AsyncViewDeferred = require('./fixture/AsyncViewDeferred'),
-    AsyncView = require('./fixture/AsyncView'),
-    AsyncViewNoneDeferred = require('./fixture/AsyncViewNoneDeferred'),
-    SimpleLayout = require('./fixture/SimpleLayout');
+import {expect} from 'chai';
+import $ from 'jquery';
+
+import {AsyncReplaceRegion} from '../src/AsyncReplaceRegion';
+import AsyncView from './fixture/AsyncView';
+import AsyncViewDeferred from './fixture/AsyncViewDeferred';
+import AsyncViewNoneDeferred from './fixture/AsyncViewNoneDeferred';
+import SimpleLayout from './fixture/SimpleLayout';
+
+import './index.js';
 
 describe('replace region', function () {
 
@@ -19,87 +24,66 @@ describe('replace region', function () {
         this.view.destroy();
     });
 
-    it('can render inside region', function (done) {
-        var _this = this,
-            promise = _this.region.show(_this.view);
+    it('can render inside region', function () {
+        let promise = this.region.show(this.view);
 
-        expect(_this.view.$el).not.toBeInDOM();
-        _this.view.resolve();
+        expect(this.view.$el).not.toBeInDOM();
+        this.view.resolve();
 
-        return promise.then(function () {
-            expect(_this.view.$el).toBeInDOM();
-            done();
+        return promise.then(() => {
+            expect(this.view.$el).toBeInDOM();
         });
     });
 
-    it('can render jquery deferred view inside region', function (done) {
-        var _this = this,
-            view = new AsyncViewDeferred(),
-            promise = _this.region.show(view);
+    it('can render jquery deferred view inside region', function () {
+        let view = new AsyncViewDeferred(),
+            promise = this.region.show(view);
 
         expect(view.$el).not.toBeInDOM();
         view.resolve();
 
         return promise.then(function () {
             expect(view.$el).toBeInDOM();
-            done();
         });
     });
 
-    it('can render immediately inside region', function (done) {
-        var view = new AsyncViewNoneDeferred(),
+    it('can render immediately inside region', function () {
+        let view = new AsyncViewNoneDeferred(),
             promise = this.region.show(view);
 
         return promise.then(function () {
             expect(view.$el).toBeInDOM();
-            done();
         });
     });
 
-    it('can consume custom promise', function(done) {
-        var _this = this, resolve;
+    it('can consume custom promise', function () {
+        let resolve;
 
-        var region = new AsyncReplaceRegion({
-            el: _this.$el,
-            promise: new Promise(function(res) {
+        let region = new AsyncReplaceRegion({
+            el: this.$el,
+            promise: new Promise(function (res) {
                 resolve = res;
             })
         });
 
-        var promise = region.show(_this.view);
+        let promise = region.show(this.view);
 
-        expect(_this.view.$el).not.toBeInDOM();
+        expect(this.view.$el).not.toBeInDOM();
         resolve();
 
-        return promise.then(function () {
-            expect(_this.view.$el).toBeInDOM();
-            done();
+        return promise.then(() => {
+            expect(this.view.$el).toBeInDOM();
         });
     });
 
-    it('if region destroy before resolve, render will not invoked', function () {
-        var spy = jasmine.createSpy();
-        this.view.on('render', spy);
+    it('create link in region view to parent view', function () {
+        let layout = new SimpleLayout().render(),
+            promise = layout.getRegion('regionB').show(this.view);
 
-        this.region.show(this.view);
-        this.region.empty();
+        this.view.resolve();
 
-        expect(spy.calls.count()).toBe(0);
-    });
-
-    it('create link in region view to parent view', function (done) {
-        var _this = this,
-            layout = new SimpleLayout().render(),
-            promise = layout.regionB.show(_this.view);
-
-        _this.view.resolve();
-
-        return promise.then(function () {
-            expect(_this.view._parentView).toBe(layout);
-            expect(_this.view._parent).toBe(layout.regionB);
-            expect(_this.view._parent._parent).toBe(layout.regionManager);
-            expect(_this.view._parent._parent._parent).toBe(layout);
-            done();
+        return promise.then(() => {
+            expect(this.view._parent).to.equal(layout.getRegion('regionB'));
         });
     });
 });

@@ -1,6 +1,6 @@
-'use strict';
+import {View} from 'backbone.marionette';
 
-module.exports = Marionette.ItemView.extend({
+module.exports = View.extend({
     template: require('./tpl/SimpleView.hbs'),
     className: 'test',
 

@@ -1,14 +1,14 @@
 module.exports = function (config) {
     config.set({
         basePath: '',
-        frameworks: ['jasmine', 'browserify'],
+        frameworks: ['mocha'],
         files: [
             'specs/index.js',
             'specs/*.spec.js'
         ],
         exclude: [],
         preprocessors: {
-            'specs/**/*.js': 'browserify'
+            'specs/**/*.js': 'webpack'
         },
         reporters: ['dots'],
         port: 9876,
@@ -17,14 +17,31 @@ module.exports = function (config) {
         autoWatch: true,
         browsers: ['PhantomJS'],
         singleRun: false,
-        browserify: {
-            debug: true,
-            'transform': [
-                [
-                    {'global': true},
-                    'injectify'
+        webpack: {
+            module: {
+                loaders: [
+                    {
+                        test: /\.js$/,
+                        loader: 'babel-loader',
+                        exclude: [/jquery/, /lodash/, /backbone/, /chai/, /es6-shim/]
+                    },
+                    {
+                        test: /\.hbs/,
+                        loader: 'injectify'
+                    }
                 ]
-            ]
+            },
+            resolve: {
+                alias: {
+                    'underscore': 'lodash'
+                }
+            }
+        },
+
+        webpackMiddleware: {
+            // webpack-dev-middleware configuration
+            // i. e.
+            stats: 'errors-only'
         }
     });
 };

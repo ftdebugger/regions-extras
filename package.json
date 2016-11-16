@@ -2,27 +2,34 @@
   "name": "regions-extras",
   "version": "3.1.0",
   "description": "Extra regions for marionette",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start --single-run --no-auto-watch"
+    "build": "babel -r -d lib src/",
+    "prepublish": "npm run build",
+    "test": "karma start --single-run --no-auto-watch"
+  },
+  "dependencies": {
+    "backbone": "^1.3",
+    "backbone.marionette": "^3",
+    "injectify": "^2",
+    "jquery": "^3"
   },
   "devDependencies": {
-    "backbone": "~1.1.2",
-    "backbone.marionette": "~2.4.0",
-    "browserify": "~4.2.0",
+    "babel-cli": "^6",
+    "babel-core": "^6",
+    "babel-loader": "^6",
+    "babel-plugin-transform-runtime": "^6",
+    "babel-preset-latest": "^6",
+    "chai": "^3.5.0",
+    "chai-jquery": "^2.0.0",
     "es6-shim": "^0.35.0",
-    "handlebars": "~2.0.0",
-    "injectify": "~1.0.0",
-    "jasmine-core": "~2.1.3",
-    "jasmine-jquery": "~2.0.0",
-    "jquery": "~2.1.1",
-    "karma": "^0.13.3",
-    "karma-browserify": "~1.0.0",
-    "karma-jasmine": "~0.2.0",
+    "karma": "^1.3.0",
+    "karma-mocha": "^1.3.0",
     "karma-phantomjs-launcher": "~1.0.0",
+    "karma-webpack": "^1.8.0",
+    "mocha": "^3.1.2",
     "phantomjs-prebuilt": "^2.1.7",
-    "underscore": "~1.6.0",
-    "vinyl-source-stream": "~0.1.1"
+    "webpack": "^2.1.0-beta.27"
   },
   "repository": {
     "type": "git",

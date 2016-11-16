@@ -1,8 +1,12 @@
-var SimpleLayout = require('./fixture/SimpleLayout');
-var SimpleView = require('./fixture/SimpleView');
-var AsyncView = require('./fixture/AsyncView');
+import {expect} from 'chai';
 
-var SIMPLE_VIEW = 'simple view';
+import SimpleLayout from './fixture/SimpleLayout';
+import AsyncView from './fixture/AsyncView';
+import SimpleView from './fixture/SimpleView';
+
+import './index.js';
+
+const SIMPLE_VIEW = 'simple view';
 
 describe('region helper', function () {
 
@@ -16,52 +20,48 @@ describe('region helper', function () {
     });
 
     it('attach named helper', function () {
-        expect(this.layout.regionA).toBeDefined();
-        expect(this.layout.regionB).toBeDefined();
+        expect(this.layout.getRegion('regionA')).not.to.equal(undefined);
+        expect(this.layout.getRegion('regionB')).not.to.equal(undefined);
     });
 
     it('first region will be synced', function () {
-        this.layout.regionA.show(new SimpleView());
+        this.layout.getRegion('regionA').show(new SimpleView());
 
-        expect(this.layout.$el.html()).toContain(SIMPLE_VIEW);
+        expect(this.layout.$el.html()).contain(SIMPLE_VIEW);
     });
 
-    it('second region will be async', function (done) {
-        var _this = this,
-            asyncView = new AsyncView(),
-            promise = _this.layout.regionB.show(asyncView);
+    it('second region will be async', function () {
+        let asyncView = new AsyncView(),
+            promise = this.layout.getRegion('regionB').show(asyncView);
 
-        expect(this.layout.$el.html()).not.toContain(SIMPLE_VIEW);
+        expect(this.layout.$el.html()).not.contain(SIMPLE_VIEW);
         asyncView.resolve();
 
-        return promise.then(function () {
-            expect(_this.layout.$el.html()).toContain(SIMPLE_VIEW);
-            done();
+        return promise.then(() => {
+            expect(this.layout.$el.html()).contain(SIMPLE_VIEW);
         });
     });
 
-    it('third region will be async with custom promise', function (done) {
-        var _this = this,
-            asyncView = new AsyncView();
+    it('third region will be async with custom promise', function () {
+        let asyncView = new AsyncView();
 
-        var haveBeenCalled = false;
+        let haveBeenCalled = false;
         asyncView.promise = function() {
             haveBeenCalled = true;
         };
 
-        var promise = _this.layout.regionC.show(asyncView);
-        _this.layout.resolve();
+        let promise = this.layout.getRegion('regionC').show(asyncView);
+        this.layout.resolve();
 
-        return promise.then(function () {
-            expect(_this.layout.$el.html()).toContain(SIMPLE_VIEW);
-            expect(haveBeenCalled).toBe(false);
-            done();
+        return promise.then(() => {
+            expect(this.layout.$el.html()).contain(SIMPLE_VIEW);
+            expect(haveBeenCalled).to.equal(false);
         });
     });
 
     it('create link in region to parent', function () {
-        expect(this.layout.regionA._parentView).toBe(this.layout);
-        expect(this.layout.regionB._parentView).toBe(this.layout);
+        expect(this.layout.getRegion('regionA')._parent).to.equal(this.layout);
+        expect(this.layout.getRegion('regionB')._parent).to.equal(this.layout);
     });
 
 });

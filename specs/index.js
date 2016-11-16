@@ -1,15 +1,22 @@
 // configure environment
-require('es6-shim');
+import 'es6-shim';
 
-var Backbone = require('backbone');
-window.$ = window.jQuery = Backbone.$ = require('jquery');
+import '../src/index';
 
-window.Marionette = require('backbone.marionette');
+import $ from 'jquery';
+import chai from 'chai';
+import chaiJQuery from 'chai-jquery';
 
-require('../index').register({
-    Handlebars: require('injectify/runtime'),
-    Marionette: require('backbone.marionette')
+window.jQuery = $;
+chai.use(chaiJQuery);
+
+chai.use(function(chai, utils){
+    let flag = utils.flag;
+
+    chai.Assertion.addMethod('toBeInDOM', function() {
+        let actual = flag(this, 'object');
+
+        this.assert(actual && actual.parent().length > 0, 'Element should attach to DOM', 'Element should not attach to DOM');
+    });
+
 });
-
-// configure libs
-require('jasmine-jquery/lib/jasmine-jquery');

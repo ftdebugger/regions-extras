@@ -1,6 +1,12 @@
-var ReplaceRegion = require('../region/ReplaceRegion'),
-    SimpleView = require('./fixture/SimpleView'),
-    SimpleLayout = require('./fixture/SimpleLayout');
+import {expect} from 'chai';
+import $ from 'jquery';
+
+import SimpleLayout from './fixture/SimpleLayout';
+import SimpleView from './fixture/SimpleView';
+
+import {ReplaceRegion} from '../src/ReplaceRegion';
+
+import './index.js';
 
 describe('replace region', function () {
 
@@ -25,17 +31,14 @@ describe('replace region', function () {
     it('replace region element and render own', function () {
         this.region.show(this.view);
         expect(this.region.$placeholder).not.toBeInDOM();
-        expect(this.region.el).toBeInDOM();
         expect(this.region.$el).toBeInDOM();
-        expect(this.view.$el.parent()).toBeMatchedBy('body');
     });
 
     it('correct replace region during view destroy', function () {
         this.region.show(this.view);
         this.view.destroy();
 
-        expect(this.region.el).toBeInDOM();
-        expect($(this.region.el).parent()).toBeMatchedBy('body');
+        expect(this.region.$el).toBeInDOM();
     });
 
     it('empty region', function () {
@@ -43,7 +46,7 @@ describe('replace region', function () {
         this.region.empty();
 
         expect(this.view.$el).not.toBeInDOM();
-        expect(this.region.el).toBeInDOM();
+        expect(this.region.$el).toBeInDOM();
     });
 
     describe('double render', function () {
@@ -68,11 +71,8 @@ describe('replace region', function () {
 
     it('create link in region view to parent view', function () {
         var layout = new SimpleLayout().render();
-        layout.regionA.show(this.view);
-        expect(this.view._parentView).toBe(layout);
-        expect(this.view._parent).toBe(layout.regionA);
-        expect(this.view._parent._parent).toBe(layout.regionManager);
-        expect(this.view._parent._parent._parent).toBe(layout);
+        layout.getRegion('regionA').show(this.view);
+        expect(this.view._parent).to.equal(layout.getRegion('regionA'));
     });
 
 });

@@ -1,36 +1,39 @@
-var manager = require('../region/manager');
+import {expect} from 'chai';
 
-var ReplaceRegion = require('../region/ReplaceRegion');
-var AsyncReplaceRegion = require('../region/AsyncReplaceRegion');
+import {defaultManager} from '../src/RegionManager';
+import {ReplaceRegion} from '../src/ReplaceRegion';
+import {AsyncReplaceRegion} from '../src/AsyncReplaceRegion';
+
+import './index.js';
 
 describe('region manager', function () {
 
     it('show create over type', function () {
-        var region = manager.getRegion({
+        let region = defaultManager.getRegion({
             regionType: 'replace'
         });
 
-        expect(region).toBe(ReplaceRegion);
+        expect(region).to.equal(ReplaceRegion);
     });
 
     it('show create over type', function () {
-        var region = manager.getRegion({
+        let region = defaultManager.getRegion({
             async: true
         });
 
-        expect(region).toBe(AsyncReplaceRegion);
+        expect(region).to.equal(AsyncReplaceRegion);
     });
 
     it('show create by default', function () {
-        var region = manager.getRegion({});
-        expect(region).toBe(ReplaceRegion);
+        let region = defaultManager.getRegion({});
+        expect(region).to.equal(ReplaceRegion);
     });
 
     it('show create with regionClass', function () {
-        var region = manager.getRegion({
+        let region = defaultManager.getRegion({
             regionClass: AsyncReplaceRegion
         });
-        expect(region).toBe(AsyncReplaceRegion);
+        expect(region).to.equal(AsyncReplaceRegion);
     });
 
 });

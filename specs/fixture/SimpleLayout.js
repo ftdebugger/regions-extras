@@ -1,6 +1,6 @@
-'use strict';
+import {View} from 'backbone.marionette';
 
-module.exports = Marionette.LayoutView.extend({
+module.exports = View.extend({
     template: require('./tpl/SimpleLayout.hbs'),
 
     initialize: function() {
@@ -12,7 +12,7 @@ module.exports = Marionette.LayoutView.extend({
         }
     },
 
-    templateHelpers: function() {
+    templateContext: function() {
         return {
             promise: this.promise
         }
