@@ -11,11 +11,7 @@ Install helper to system
 and now register in Handlebars
 
 ```js
-require('regions-extras').register({
-    Handlebars: require('injectify/runtime'), // By default it will get Handlebars from window object
-    Marionette: require('backbone.marionette'), // By default it will get Marionette from window object
-    registerHelper: true // by default
-});
+import 'regions-extras';
 ```
 
 Replace region
@@ -35,7 +31,7 @@ For example we have this template:
 and this script:
 
 ```js
-var ReplaceRegion = require('regions-extras/region/ReplaceRegion');
+var ReplaceRegion = require('regions-extras/lib/ReplaceRegion');
 var region = new ReplaceRegion({
     el: '#region'
 });
@@ -64,7 +60,7 @@ This region work like replace region, but it delay view render. Region expect im
 return promise (`jQuery.Deferred` or `Promise` for example). View will be rendered when promise fulfilled.
 
 ```js
-var AsyncReplaceRegion = require('regions-extras/region/AsyncReplaceRegion');
+var AsyncReplaceRegion = require('regions-extras/lib/AsyncReplaceRegion');
 var AsyncView = Backbone.View.extend({
     promise: function () {
         return this.model.fetch();
@@ -86,7 +82,7 @@ Another way of working with the `AsyncReplaceRegion` is providing a custom promi
 After resolving a promise the `AsyncReplaceRegion` starts working the same as the `ReplaceRegion`.
 
 ```js
-var AsyncReplaceRegion = require('regions-extras/region/AsyncReplaceRegion');
+var AsyncReplaceRegion = require('regions-extras/lib/AsyncReplaceRegion');
 
 var region = new AsyncReplaceRegion({
     el: '#region',
@@ -119,7 +115,7 @@ and `Layout`:
 ```js
 require('region-extras');
 
-var Layout = Marionette.Layout.extend({
+var Layout = Marionette.View.extend({
      template: require('./tpl/template.hbs'),
 
      onRender: function () {
@@ -153,7 +149,7 @@ It is like `regionClass` option, but use region manager to create region
 in js
 
 ```js
-var manager = require('regions-extras/region/manager');
+var manager = require('regions-extras/lib/RegionManager').defaultManager;
 manager.addRegion('my_region', SomeRegionClass);
 ```
 
@@ -194,6 +190,11 @@ If not provided, the `view.promise()` method will be invoked instead every time 
 
 Changelog
 =========
+
+v4.0.0
+======
+
+ * Marionette 3
 
 v3.0.0
 ======
