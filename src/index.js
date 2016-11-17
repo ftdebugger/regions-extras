@@ -19,7 +19,7 @@ let ViewProto = Marionette.View.prototype,
  *   {{region "myAsyncRegion" async=true}}
  *   {{region "myAsyncRegion" async=true promise=customPromise}}
  *   {{region "myAsyncRegion" regionClass=(require "./SomeRegionClass")}}
- *   {{region "myAsyncRegion" regionType="replace_region"}}
+ *   {{region "myAsyncRegion" regionType="replace_region" customHashOption="normal"}}
  *
  * @param {string} name
  * @param {{hash: {tagName: string, tag: string, async: boolean, regionClass: string, regionType: string}}} options
@@ -28,39 +28,39 @@ let ViewProto = Marionette.View.prototype,
 export default function regionHelper(name, options) {
     let id = 'r' + (++uniqueId).toString(36);
 
-    if (typeof options == "undefined") {
+    if (options === undefined) {
         options = name;
         name = id;
     }
 
     let selector = '#' + id,
         hash = options.hash,
-        tagName = hash.tagName || 'div',
-        regionClass = defaultManager.getRegion(hash);
+        {tagName = 'div', promise} = hash,
+        regionClass = defaultManager.getRegion(hash),
+        view = extractView(this, hash, options);
 
     name = name || id;
 
-    let view = extractView(this, options.hash, options);
-
     if (view) {
         let params = {
-            selector: selector,
-            regionClass: regionClass,
+            hash,
+            selector,
+            regionClass,
             parentEl: function () {
                 return view.$el;
             }
         };
 
-        if (hash.promise) {
-            params.promise = hash.promise;
+        if (promise) {
+            params.promise = promise;
         }
 
-        let region = view.addRegion(name, params);
+        view.addRegion(name, params);
     } else {
-        console.warn('Cannot find "view" for region "' + name + '"');
+        console.warn(`Cannot find "view" for region "${name}"`);
     }
 
-    return new Handlebars.SafeString('<' + tagName + ' id=' + id + '></' + tagName + '>');
+    return new Handlebars.SafeString(`<${tagName} id="${id}"></${tagName}>`);
 };
 
 Handlebars.registerHelper('region', regionHelper);
@@ -90,5 +90,5 @@ Marionette.Renderer.render = function (template, data, view) {
         });
     }
 
-    return String(template(data, {data: {view: view}}));
+    return String(template(data, {data: {view}}));
 };
