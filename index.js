@@ -93,7 +93,8 @@
                 regionClass: regionClass,
                 parentEl: function () {
                     return view.$el;
-                }
+                },
+                hash: hash
             };
 
             if (hash.promise) {
